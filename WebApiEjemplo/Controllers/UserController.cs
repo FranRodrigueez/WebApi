@@ -24,6 +24,8 @@ namespace WebApiEjemplo.Controllers
             return us;
         }
 
+
+
         [HttpPut(Name = "ActualizarUsuario")]
         public void ActualizarUsuario(UserIgnore us, string correo)
         {
@@ -75,6 +77,7 @@ namespace WebApiEjemplo.Controllers
 
             class1.GetDelete(usuario);
         }
+
 
 
         //Create -> Post

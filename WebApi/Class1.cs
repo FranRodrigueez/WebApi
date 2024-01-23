@@ -5,7 +5,7 @@ namespace WebApi
 {
     public class Class1
     {
-        public static SqlConnection? connection { get; set; }
+        public SqlConnection? connection { get; set; }
 
         public void connect()
         {
