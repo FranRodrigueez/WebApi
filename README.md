@@ -49,7 +49,46 @@ This class is designed to model inventory items within your API, and the [JsonIg
 
 ### UserIgnore.cs
 
-Contenido de UserIgnore.cs.
+UserIgnore.cs is another class within the WebApiEjemplo.Clases namespace. This class represents user information.
+
+```csharp
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace WebApiEjemplo.Clases
+{
+    public class UserIgnore
+    {
+        [JsonIgnore]
+        public int? idUser { get; set; }
+
+        public string Usuario { get; set; }
+
+        public string pass { get; set; }
+
+        public string email { get; set; }
+
+        public int? Administrador { get; set; }
+
+        public int? Manager { get; set; }
+
+        public int? idNegocio { get; set; }
+
+        public int? validated { get; set; }
+    }
+}
+```
+
+- idUser: An optional integer representing the ID of the user. The [JsonIgnore] attribute is used to exclude this property from JSON serialization, implying that it should not be exposed externally.
+- Usuario: A string representing the username of the user.
+- pass: A string representing the password of the user.
+- email: A string representing the email of the user.
+- Administrador: An optional integer indicating whether the user is an administrator.
+- Manager: An optional integer indicating whether the user is a manager.
+- idNegocio: An optional integer representing the ID of the business associated with the user.
+- validated: An optional integer indicating whether the user is validated.
+
+This class is designed to model user information within your API, and the [JsonIgnore] attribute suggests that sensitive information, such as the user ID, should not be included when converting the object to JSON, possibly for security or privacy reasons.
 
 ## Controllers
 
