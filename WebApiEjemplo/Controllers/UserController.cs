@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApi;
 using WebApi.Postgress;
+using WebApiEjemplo.Clases;
 
 namespace WebApiEjemplo.Controllers
 {
@@ -78,9 +79,6 @@ namespace WebApiEjemplo.Controllers
 
             class1.GetDelete(usuario);
         }
-
-       
-
 
         //Create -> Post
         //Update -> Put

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApi;
 using WebApi.Postgress;
+using WebApiEjemplo.Clases;
 
 namespace WebApiEjemplo.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace WebApiEjemplo
+namespace WebApiEjemplo.Clases
 {
     public class UserIgnore
     {
