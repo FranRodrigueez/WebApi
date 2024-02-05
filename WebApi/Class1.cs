@@ -217,7 +217,7 @@ namespace WebApi
             queryGenericStored("svp_InventarioSQL_create", userparam);
         }
 
-        //Actualizar
+        //Actualizar InventarioSQL
         public void UpdateInventario(InventarioSQL inventario_to_search)
         {
             List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
@@ -228,7 +228,7 @@ namespace WebApi
             queryGenericStored("svp_InventarioSQL_update", userparam);
         }
 
-        //Borrar
+        //Borrar InventarioSQL
         public void DeleteInventario(InventarioSQL inventario_to_search)
         {
             List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
