@@ -176,7 +176,7 @@ namespace WebApiEjemplo.Controllers
     }
 }
 ```
--  HTTP GET requests and is responsible for retrieving information from the inventory.
+- HTTP GET requests and is responsible for retrieving information from the inventory.
 - HTTP PUT requests and is used to update information in the inventory.
 - HTTP POST requests and is responsible for creating new items in the inventory.
 - HTTP DELETE requests and is used to delete items from the inventory.
