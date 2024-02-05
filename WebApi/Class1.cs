@@ -206,7 +206,7 @@ namespace WebApi
             }).ToList();
             return item;
         }
-        //Insertar en InventarioSQL
+        //Crear en InventarioSQL
         public void InventarioCreate(InventarioSQL inventario_to_search)
         {
             List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
@@ -215,6 +215,26 @@ namespace WebApi
             userparam.Add(new KeyValuePair<string, dynamic>("@proveedor", inventario_to_search.proveedor));
 
             queryGenericStored("svp_InventarioSQL_create", userparam);
+        }
+
+        //Actualizar
+        public void UpdateInventario(InventarioSQL inventario_to_search)
+        {
+            List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
+            userparam.Add(new KeyValuePair<string, dynamic>("@codigo", inventario_to_search.codigo));
+            userparam.Add(new KeyValuePair<string, dynamic>("@nombre", inventario_to_search.nombre));
+            userparam.Add(new KeyValuePair<string, dynamic>("@proveedor", inventario_to_search.proveedor));
+
+            queryGenericStored("svp_InventarioSQL_update", userparam);
+        }
+
+        //Borrar
+        public void DeleteInventario(InventarioSQL inventario_to_search)
+        {
+            List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
+            userparam.Add(new KeyValuePair<string, dynamic>("@codigo", inventario_to_search.codigo));
+
+            queryGenericStored("svp_InventarioSQL_delete", userparam);
         }
     }
 }

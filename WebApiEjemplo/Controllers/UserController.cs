@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApi;
+using WebApi.Postgress;
 
 namespace WebApiEjemplo.Controllers
 {
@@ -78,7 +79,8 @@ namespace WebApiEjemplo.Controllers
             class1.GetDelete(usuario);
         }
 
-        //Insertar inventario
+       
+
 
         //Create -> Post
         //Update -> Put
