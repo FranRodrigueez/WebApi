@@ -7,7 +7,7 @@ Table of contents
 =================
 
 >- [Clases](#clases)
- > - [InventarioIgnore.cs](#inventarioignorecs)
+ >- [InventarioIgnore.cs](#inventarioignorecs)
   >- [UserIgnore.cs](#userignorecs)
 >- [Controllers](#controllers)
   >- [InventarioControllers.cs](#inventariocontrollerscs)
