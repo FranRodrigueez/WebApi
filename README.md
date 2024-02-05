@@ -37,7 +37,7 @@ namespace WebApiEjemplo.Clases
         public string proveedor { get; set; }
     }
 }
-
+```
 InventarioIgnore.cs is a class within the WebApiEjemplo.Clases namespace. This class represents a part of your inventory system.
 
 id: An optional integer representing the ID of the inventory item. The [JsonIgnore] attribute is used to exclude this property from JSON serialization, implying that it should not be exposed externally.
