@@ -94,8 +94,92 @@ This class is designed to model user information within your API, and the [JsonI
 
 ### InventarioControllers.cs
 
-Contenido de InventarioControllers.cs.
+This class, InventarioController, is a controller in an ASP.NET Core Web API.
 
+```csharp
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApi;
+using WebApi.Postgress;
+using WebApiEjemplo.Clases;
+
+namespace WebApiEjemplo.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class InventarioController : ControllerBase
+    {
+        private readonly ILogger<InventarioController> _logger;
+
+        public InventarioController(ILogger<InventarioController> logger)
+        {
+            _logger = logger;
+        }
+
+        //Insertar inventario
+        [HttpGet(Name = "InsertarInventario")]
+        public IList<InventarioSQL> GetIntventario(string nom)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            IList<InventarioSQL> us = class1.GetInventario(new InventarioSQL() { nombre = nom, });
+
+            return us;
+        }
+
+        //Actualizar inventario
+        [HttpPut(Name = "ActualizarInventario")]
+        public void ActualizarInventario(InventarioSQL inv, string cod)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+
+            InventarioSQL inventario = new InventarioSQL
+            {
+                nombre = inv.nombre,
+                codigo = inv.codigo,
+                proveedor = inv.proveedor,
+            };
+
+            class1.UpdateInventario(inventario);
+        }
+
+        //Crear inventario
+        [HttpPost(Name = "CrearInventario")]
+        public void CrearInventario(InventarioIgnore inventario)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            InventarioSQL inv = new InventarioSQL
+            {
+                codigo = inventario.codigo,
+                nombre = inventario.nombre,
+                proveedor = inventario.proveedor,
+            };
+
+            class1.InventarioCreate(inv);
+        }
+
+        //Borrar inventario
+        [HttpDelete(Name = "BorrarInventario")]
+        public void BorrarUsuario(string cod)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            InventarioSQL invent = new InventarioSQL { codigo = cod };
+
+            class1.DeleteInventario(invent);
+        }
+    }
+}
+```
+
+- The methods (GetIntventario, ActualizarInventario, CrearInventario, BorrarUsuario) interact with a class named Class1 to perform various operations on the inventory data.
+- The class is configured as an API controller with routing information specified.
+- Dependency injection is used to inject a logger (ILogger<InventarioController>) into the controller.
+-  HTTP GET requests and is responsible for retrieving information from the inventory.
+- HTTP PUT requests and is used to update information in the inventory.
+- HTTP POST requests and is responsible for creating new items in the inventory.
+- HTTP DELETE requests and is used to delete items from the inventory.
 ### MiControladorWebSocket.cs
 
 Contenido de MiControladorWebSocket.cs.
