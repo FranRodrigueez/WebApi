@@ -96,6 +96,10 @@ This class is designed to model user information within your API, and the [JsonI
 
 This class, InventarioController, is a controller in an ASP.NET Core Web API.
 
+- The methods (GetIntventario, ActualizarInventario, CrearInventario, BorrarUsuario) interact with a class named Class1 to perform various operations on the inventory data.
+- The class is configured as an API controller with routing information specified.
+- Dependency injection is used to inject a logger (ILogger<InventarioController>) into the controller.
+
 ```csharp
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApi;
@@ -172,10 +176,6 @@ namespace WebApiEjemplo.Controllers
     }
 }
 ```
-
-- The methods (GetIntventario, ActualizarInventario, CrearInventario, BorrarUsuario) interact with a class named Class1 to perform various operations on the inventory data.
-- The class is configured as an API controller with routing information specified.
-- Dependency injection is used to inject a logger (ILogger<InventarioController>) into the controller.
 -  HTTP GET requests and is responsible for retrieving information from the inventory.
 - HTTP PUT requests and is used to update information in the inventory.
 - HTTP POST requests and is responsible for creating new items in the inventory.
