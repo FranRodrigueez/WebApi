@@ -180,19 +180,119 @@ namespace WebApiEjemplo.Controllers
 - HTTP PUT requests and is used to update information in the inventory.
 - HTTP POST requests and is responsible for creating new items in the inventory.
 - HTTP DELETE requests and is used to delete items from the inventory.
-### MiControladorWebSocket.cs
-
-Contenido de MiControladorWebSocket.cs.
 
 ### UserController.cs
 
-Contenido de UserController.cs.
+This class, UserController, is a controller in an ASP.NET Core Web API.
+
+- The methods (GetDatosUsuario, ActualizarUsuario, CrearUsuario, BorrarUsuario) interact with a class named Class1 to perform various operations on the inventory data.
+- The class is configured as an API controller with routing information specified.
+- Dependency injection is used to inject a logger (ILogger<UserController>) into the controller.
+
+```csharp
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApi;
+using WebApi.Postgress;
+using WebApiEjemplo.Clases;
+
+namespace WebApiEjemplo.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class UserController : ControllerBase
+    {
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(ILogger<UserController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet(Name = "DatosUsuario")]
+        public IList<Users> GetDatosUsuario(string usu, string password)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            IList<Users> us = class1.GetUsers(new Users() { Usuario = usu, pass = password });
+
+            return us;
+        }
+
+
+
+        [HttpPut(Name = "ActualizarUsuario")]
+        public void ActualizarUsuario(UserIgnore us, string correo)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+
+            Users user = new Users
+            {
+                Usuario = us.Usuario,
+                pass = us.pass,
+                email = correo,
+                Administrador = us.Administrador,
+                Manager = us.Manager,
+                idNegocio = us.idNegocio,
+                validated = us.validated,
+            };
+
+            class1.GetUpdate(user);
+        }
+
+        [HttpPost(Name = "CrearUsuario")]
+        public void CrearUsuario(UserIgnore usuario)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            Users us = new Users
+            {
+                Usuario = usuario.Usuario, 
+                pass = usuario.pass, 
+                email = usuario.email, 
+                Administrador = usuario.Administrador, 
+                idNegocio = usuario.idNegocio, 
+                Manager = usuario.Manager, 
+                validated = usuario.validated 
+            };
+
+            class1.GetCreate(us);
+
+            Mail mail = new Mail();
+            mail.send(us);
+        }
+
+        [HttpDelete(Name = "BorrarUsuario")]
+        public void BorrarUsuario(string correo)
+        {
+            Class1 class1 = new Class1();
+            //class1.connect(true);
+            Users usuario = new Users { email = correo};
+
+            class1.GetDelete(usuario);
+        }
+
+        //Create -> Post
+        //Update -> Put
+        //Insert(Crear) -> Post
+        //Read -> Get
+    }
+}
+```
+
+- HTTP GET requests and is responsible for retrieving information from the user.
+- HTTP PUT requests and is used to update information in the user.
+- HTTP POST requests and is responsible for creating new items in the user.
+- HTTP DELETE requests and is used to delete items from the user.
 
 ### WeatherForeCastController.cs
 
 Contenido de WeatherForeCastController.cs.
 
-## Program.cs
+### MiControladorWebSocket.cs
 
-Contenido de Program.cs.
+Contenido de MiControladorWebSocket.cs.
+
+
+
 
