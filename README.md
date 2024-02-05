@@ -20,6 +20,8 @@ Table of contents
 
 ### InventarioIgnore.cs
 
+InventarioIgnore.cs is a class within the WebApiEjemplo.Clases namespace. This class represents a part of your inventory system.
+
 ```csharp
 using System.Text.Json.Serialization;
 
@@ -38,12 +40,10 @@ namespace WebApiEjemplo.Clases
     }
 }
 ```
-InventarioIgnore.cs is a class within the WebApiEjemplo.Clases namespace. This class represents a part of your inventory system.
-
-id: An optional integer representing the ID of the inventory item. The [JsonIgnore] attribute is used to exclude this property from JSON serialization, implying that it should not be exposed externally.
-codigo: A string representing the code of the inventory item.
-nombre: A string representing the name of the inventory item.
-proveedor: A string representing the supplier of the inventory item.
+- id: An optional integer representing the ID of the inventory item. The [JsonIgnore] attribute is used to exclude this property from JSON serialization, implying that it should not be exposed externally.
+- codigo: A string representing the code of the inventory item.
+- nombre: A string representing the name of the inventory item.
+- proveedor: A string representing the supplier of the inventory item.
 
 This class is designed to model inventory items within your API, and the [JsonIgnore] attribute suggests that the ID property should not be included when converting the object to JSON, possibly for security or privacy reasons.
 
