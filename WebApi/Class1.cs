@@ -1,11 +1,14 @@
-﻿using System.Data;
+﻿using Npgsql;
+using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
+using WebApi.Postgress;
 
 namespace WebApi
 {
     public class Class1
     {
-        public SqlConnection? connection { get; set; }
+        public static SqlConnection? connection { get; set; }
 
         public void connect()
         {
@@ -124,5 +127,94 @@ namespace WebApi
             queryGenericStored("svp_TablaUsuario_delete", userparam);
         }
 
+
+        //Consultar en InventarioSQL
+        public List<T> ConsultaTest<T>(string sql, T DatosFiltro) where T : new()
+        {
+            string consulta = string.Format("Select * from {0}", sql);
+
+            Type tin = DatosFiltro.GetType();
+            PropertyInfo[] propcons = tin.GetProperties();
+
+            string wherecondition = string.Format(" where ");
+
+
+            foreach (var itemprop in propcons)
+            {
+
+                var objreaded = itemprop.GetValue(DatosFiltro);
+                if (objreaded != null)
+                {
+                    if (itemprop.PropertyType == Type.GetType("System.String"))
+                    {
+                        wherecondition = string.Format("{0}  {1} = '{2}'", wherecondition, itemprop.Name, objreaded);
+                    }
+                    else
+                    {
+                        wherecondition = string.Format("{0}  {1} = '{2}'", itemprop.Name, objreaded);
+                    }
+                }
+            }
+            wherecondition = wherecondition.Substring(0, wherecondition.Length - "and".Length);
+ 
+            using var command = new SqlCommand(consulta,connection);
+            using var reader = command.ExecuteReader();
+            List<T> result = new List<T>();
+
+            while (reader.Read())
+            {
+                T DatoInterno = new T();
+                Type t = DatoInterno.GetType();
+                PropertyInfo[] prop = t.GetProperties();
+                int count = 0;
+                foreach (var itemprop in prop)
+                {
+
+                    var tipon = reader.GetFieldType(count);
+                    Type o = itemprop.PropertyType;
+                    MethodInfo method = reader.GetType().GetMethod("GetFieldValue")
+                             .MakeGenericMethod(new Type[] { o });
+                    object? r = method.Invoke(reader, new object[] { count });
+
+
+                    itemprop.SetValue(DatoInterno, r);
+
+
+                    count++;
+                }
+                result.Add(DatoInterno);
+            }
+            return result;
+        }
+
+        //Seleccionar en InventarioSQL
+        public IList<InventarioSQL> GetInventario(InventarioSQL inventario_to_search)
+        {
+            List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
+            userparam.Add(new KeyValuePair<string, dynamic>("@nombre", inventario_to_search.nombre));
+            userparam.Add(new KeyValuePair<string, dynamic>("@codigo", inventario_to_search.codigo));
+            userparam.Add(new KeyValuePair<string, dynamic>("@proveedor", inventario_to_search.proveedor));
+            
+            DataSet ds = queryGenericStored("svp_InventarioSQL_select", userparam);
+            IList<InventarioSQL> item = ds.Tables[0].AsEnumerable().Select(row =>
+            new InventarioSQL
+            {
+                nombre = row.Field<string?>("nombre"),
+                codigo = row.Field<string?>("codigo"),
+                proveedor = row.Field<string>("proveedor"),
+
+            }).ToList();
+            return item;
+        }
+        //Insertar en InventarioSQL
+        public void InventarioCreate(InventarioSQL inventario_to_search)
+        {
+            List<KeyValuePair<string, dynamic>> userparam = new List<KeyValuePair<string, dynamic>>();
+            userparam.Add(new KeyValuePair<string, dynamic>("@codigo", inventario_to_search.codigo));
+            userparam.Add(new KeyValuePair<string, dynamic>("@nombre", inventario_to_search.nombre));
+            userparam.Add(new KeyValuePair<string, dynamic>("@proveedor", inventario_to_search.proveedor));
+
+            queryGenericStored("svp_InventarioSQL_create", userparam);
+        }
     }
 }

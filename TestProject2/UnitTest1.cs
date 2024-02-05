@@ -1,4 +1,5 @@
 using WebApi;
+using WebApi.Postgress;
 
 namespace TestProject2
 {
@@ -49,5 +50,38 @@ namespace TestProject2
 
         }
 
+        [TestMethod]
+        public void TestDBSelectFunction()
+        {
+            //Requisitos de la actividad:
+            //Realizar la consulta con parametros de entrada en formato clase(InventarioSQL),
+            //tener como resultado la lista de los inventarios que coincidan con los filtros definidos en el test
+            Class1 t = new Class1();
+            t.connect(true);
+            Assert.AreEqual("Orbea", t.ConsultaTest<InventarioSQL>("InventarioSQL", new InventarioSQL() { codigo = "1234" })[0].nombre);
+
+        }
+
+        //Test Select para InventarioSQL
+        [TestMethod]
+        public void TestSelectInventario()
+        {
+            Class1 test = new Class1();
+            test.connect(true);
+            test.TestDB();
+            test.GetInventario(new InventarioSQL() { nombre = "Fran"});
+
+        }
+
+        //Test Create
+       [TestMethod]
+        public void TestInsertInventario()
+        {
+            Class1 test = new Class1();
+            test.connect(true);
+            test.TestDB();
+            test.InventarioCreate(new InventarioSQL() { codigo = "12345", nombre = "Israel", proveedor = "Pablo Ruso"});
+        }
+       
     }
 }

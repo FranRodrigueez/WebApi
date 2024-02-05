@@ -78,7 +78,7 @@ namespace WebApiEjemplo.Controllers
             class1.GetDelete(usuario);
         }
 
-
+        //Insertar inventario
 
         //Create -> Post
         //Update -> Put

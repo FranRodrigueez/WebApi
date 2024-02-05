@@ -1,4 +1,5 @@
 using WebApi;
+using WebApiEjemplo.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,11 @@ con.connect();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseWebSockets();                            // Aceptar WebSockets
+app.Map("/ws", b => {                           //Mapping the ws route
+    b.UseMiddleware<MiControladorDeWebSockets>();  // Controlador para WebSockets
+});
 
 app.MapControllers();
 
