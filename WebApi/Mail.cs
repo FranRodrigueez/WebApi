@@ -21,6 +21,10 @@ namespace WebApi
             email.Subject = "Probando el email";
             email.Body = "Hola desde C#";
 
+            // Adjuntar el archivo PDF
+            byte[] pdfBytes = PDFGenerator.test(); // Llamada al método que genera el PDF
+            Attachment pdfAttachment = PDFGenerator.CreateAsAttachment(pdfBytes, "archivo.pdf");
+            email.Attachments.Add(pdfAttachment);
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.Host = "smtp.gmail.com";
