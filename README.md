@@ -6,14 +6,14 @@ WEBApiEjemplo
 Table of contents
 =================
 
-- [Clases](#clases)
-  - [InventarioIgnore.cs](#inventarioignorecs)
-  - [UserIgnore.cs](#userignorecs)
-- [Controllers](#controllers)
-  - [InventarioControllers.cs](#inventariocontrollerscs)
-  - [MiControladorWebSocket.cs](#micontroladorwebsocketcs)
-  - [UserController.cs](#usercontrollercs)
-  - [WeatherForeCastController.cs](#weatherforecastcontrollercs)
+>- [Clases](#clases)
+ > - [InventarioIgnore.cs](#inventarioignorecs)
+  >- [UserIgnore.cs](#userignorecs)
+>- [Controllers](#controllers)
+  >- [InventarioControllers.cs](#inventariocontrollerscs)
+  >- [MiControladorWebSocket.cs](#micontroladorwebsocketcs)
+  >- [UserController.cs](#usercontrollercs)
+  >- [WeatherForeCastController.cs](#weatherforecastcontrollercs)
 
 ## Clases
 
